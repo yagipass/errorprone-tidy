@@ -25,7 +25,8 @@ import org.jspecify.annotations.Nullable;
 
 @AutoService(BugChecker.class)
 @BugPattern(
-    summary = "Return the condition directly instead of returning boolean literals from each branch",
+    summary =
+        "Return the condition directly instead of returning boolean literals from each branch",
     severity = WARNING,
     linkType = NONE)
 public final class SimplifyBooleanReturn extends BugChecker implements IfTreeMatcher {
@@ -45,8 +46,7 @@ public final class SimplifyBooleanReturn extends BugChecker implements IfTreeMat
     if (!isPrimitiveBoolean(condition)) {
       return NO_MATCH;
     }
-    String value =
-        whenTrue.value() ? state.getSourceForNode(condition) : negate(condition, state);
+    String value = whenTrue.value() ? state.getSourceForNode(condition) : negate(condition, state);
     String replacement = whenTrue.keyword() + " " + value + ";";
     return buildDescription(tree)
         .setMessage(String.format("This if statement can be simplified to `%s`", replacement))

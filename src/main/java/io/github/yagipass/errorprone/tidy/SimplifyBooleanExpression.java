@@ -53,8 +53,7 @@ public final class SimplifyBooleanExpression extends BugChecker
     if (keepOther == null) {
       return NO_MATCH;
     }
-    String replacement =
-        keepOther ? state.getSourceForNode(other) : negate(other, state);
+    String replacement = keepOther ? state.getSourceForNode(other) : negate(other, state);
     return simplify(tree, replacement);
   }
 
@@ -85,8 +84,7 @@ public final class SimplifyBooleanExpression extends BugChecker
     if (!isPrimitiveBoolean(condition)) {
       return NO_MATCH;
     }
-    String replacement =
-        whenTrue ? state.getSourceForNode(condition) : negate(condition, state);
+    String replacement = whenTrue ? state.getSourceForNode(condition) : negate(condition, state);
     return simplify(tree, replacement);
   }
 
