@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: weekly
+    allow:
+      - dependency-name: nixpkgs
+    commit-message:
+      prefix: build
+      include: scope
