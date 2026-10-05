@@ -9,6 +9,7 @@ import com.sun.source.tree.Tree;
 import com.sun.source.tree.UnaryTree;
 import com.sun.tools.javac.code.Type;
 import javax.lang.model.type.TypeKind;
+import org.jspecify.annotations.Nullable;
 
 final class BooleanExpressions {
   private BooleanExpressions() {}
@@ -21,11 +22,14 @@ final class BooleanExpressions {
     return type != null && type.getKind() == TypeKind.BOOLEAN;
   }
 
-  static String negate(ExpressionTree tree, VisitorState state) {
+  static @Nullable String negate(ExpressionTree tree, VisitorState state) {
     if (tree instanceof UnaryTree unary && unary.getKind() == Tree.Kind.LOGICAL_COMPLEMENT) {
       return state.getSourceForNode(unary.getExpression());
     }
     String source = state.getSourceForNode(tree);
+    if (source == null) {
+      return null;
+    }
     return requiresParentheses(tree, state) ? "!(" + source + ")" : "!" + source;
   }
 }

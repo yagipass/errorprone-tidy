@@ -30,6 +30,8 @@ import org.jspecify.annotations.Nullable;
     severity = WARNING,
     linkType = NONE)
 public final class SimplifyBooleanReturn extends BugChecker implements IfTreeMatcher {
+  private static final long serialVersionUID = 5674167023609375752L;
+
   private record BooleanExit(String keyword, boolean value) {}
 
   @Override
@@ -47,6 +49,9 @@ public final class SimplifyBooleanReturn extends BugChecker implements IfTreeMat
       return NO_MATCH;
     }
     String value = whenTrue.value() ? state.getSourceForNode(condition) : negate(condition, state);
+    if (value == null) {
+      return NO_MATCH;
+    }
     String replacement = whenTrue.keyword() + " " + value + ";";
     return buildDescription(tree)
         .setMessage(String.format("This if statement can be simplified to `%s`", replacement))
@@ -70,7 +75,7 @@ public final class SimplifyBooleanReturn extends BugChecker implements IfTreeMat
   }
 
   private static @Nullable Boolean literalValue(@Nullable ExpressionTree tree) {
-    return tree instanceof LiteralTree literal && literal.getValue() instanceof Boolean value
+    return (tree instanceof LiteralTree literal && literal.getValue() instanceof Boolean value)
         ? value
         : null;
   }

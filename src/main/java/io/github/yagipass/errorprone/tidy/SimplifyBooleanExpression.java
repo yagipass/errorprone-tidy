@@ -30,6 +30,8 @@ import org.jspecify.annotations.Nullable;
     linkType = NONE)
 public final class SimplifyBooleanExpression extends BugChecker
     implements BinaryTreeMatcher, UnaryTreeMatcher, ConditionalExpressionTreeMatcher {
+  private static final long serialVersionUID = -5974696324324712927L;
+
   @Override
   public Description matchBinary(BinaryTree tree, VisitorState state) {
     Boolean left = literalValue(tree.getLeftOperand());
@@ -54,6 +56,9 @@ public final class SimplifyBooleanExpression extends BugChecker
       return NO_MATCH;
     }
     String replacement = keepOther ? state.getSourceForNode(other) : negate(other, state);
+    if (replacement == null) {
+      return NO_MATCH;
+    }
     return simplify(tree, replacement);
   }
 
@@ -85,6 +90,9 @@ public final class SimplifyBooleanExpression extends BugChecker
       return NO_MATCH;
     }
     String replacement = whenTrue ? state.getSourceForNode(condition) : negate(condition, state);
+    if (replacement == null) {
+      return NO_MATCH;
+    }
     return simplify(tree, replacement);
   }
 
