@@ -29,6 +29,4 @@ Requires Error Prone 2.50.0 or later on JDK 21 or later. Set up Error Prone as d
 </annotationProcessorPaths>
 ```
 
-The artifact is not published yet; run `mvn install` in this repository first.
-
 To turn off a check, pass `-Xep:<CheckName>:OFF` to Error Prone.
