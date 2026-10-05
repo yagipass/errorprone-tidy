@@ -1,5 +1,13 @@
 version: 2
 updates:
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: build
+      include: scope
+
   - package-ecosystem: nix
     directory: /
     schedule:
