@@ -32,6 +32,13 @@ public final class SimplifyBooleanExpression extends BugChecker
     implements BinaryTreeMatcher, UnaryTreeMatcher, ConditionalExpressionTreeMatcher {
   private static final long serialVersionUID = -5974696324324712927L;
 
+  private enum Equivalent {
+    OPERAND,
+    NEGATED_OPERAND,
+    CONSTANT,
+    UNKNOWN
+  }
+
   @Override
   public Description matchBinary(BinaryTree tree, VisitorState state) {
     Boolean left = literalValue(tree.getLeftOperand());
@@ -44,18 +51,20 @@ public final class SimplifyBooleanExpression extends BugChecker
     if (!isPrimitiveBoolean(other)) {
       return NO_MATCH;
     }
-    Boolean keepOther =
+    Equivalent equivalent =
         switch (tree.getKind()) {
-          case EQUAL_TO -> literal;
-          case NOT_EQUAL_TO -> !literal;
-          case CONDITIONAL_AND -> literal ? Boolean.TRUE : null;
-          case CONDITIONAL_OR -> literal ? null : Boolean.TRUE;
-          default -> null;
+          case EQUAL_TO -> literal ? Equivalent.OPERAND : Equivalent.NEGATED_OPERAND;
+          case NOT_EQUAL_TO -> literal ? Equivalent.NEGATED_OPERAND : Equivalent.OPERAND;
+          case CONDITIONAL_AND -> literal ? Equivalent.OPERAND : Equivalent.CONSTANT;
+          case CONDITIONAL_OR -> literal ? Equivalent.CONSTANT : Equivalent.OPERAND;
+          default -> Equivalent.UNKNOWN;
         };
-    if (keepOther == null) {
-      return NO_MATCH;
-    }
-    String replacement = keepOther ? state.getSourceForNode(other) : negate(other, state);
+    String replacement =
+        switch (equivalent) {
+          case OPERAND -> state.getSourceForNode(other);
+          case NEGATED_OPERAND -> negate(other, state);
+          case CONSTANT, UNKNOWN -> null;
+        };
     if (replacement == null) {
       return NO_MATCH;
     }
