@@ -39,6 +39,8 @@ import javax.lang.model.element.NestingKind;
     linkType = NONE)
 public final class RedundantModifier extends BugChecker
     implements ClassTreeMatcher, MethodTreeMatcher, VariableTreeMatcher {
+  private static final long serialVersionUID = 7960515174634518386L;
+
   @Override
   public Description matchClass(ClassTree tree, VisitorState state) {
     ClassSymbol symbol = getSymbol(tree);

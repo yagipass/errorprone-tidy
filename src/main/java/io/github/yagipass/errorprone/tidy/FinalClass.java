@@ -29,6 +29,8 @@ import javax.lang.model.element.Modifier;
     severity = SUGGESTION,
     linkType = NONE)
 public final class FinalClass extends BugChecker implements ClassTreeMatcher {
+  private static final long serialVersionUID = 6001496812822206919L;
+
   @Override
   public Description matchClass(ClassTree tree, VisitorState state) {
     if (tree.getKind() != Tree.Kind.CLASS) {

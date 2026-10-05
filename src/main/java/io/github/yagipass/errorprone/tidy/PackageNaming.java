@@ -3,6 +3,7 @@ package io.github.yagipass.errorprone.tidy;
 import static com.google.errorprone.BugPattern.LinkType.CUSTOM;
 import static com.google.errorprone.BugPattern.SeverityLevel.WARNING;
 import static com.google.errorprone.matchers.Description.NO_MATCH;
+import static com.google.errorprone.util.ASTHelpers.getSymbol;
 
 import com.google.auto.service.AutoService;
 import com.google.errorprone.BugPattern;
@@ -20,6 +21,8 @@ import java.util.regex.Pattern;
     linkType = CUSTOM,
     link = "https://google.github.io/styleguide/javaguide.html#s5.2.1-package-names")
 public final class PackageNaming extends BugChecker implements CompilationUnitTreeMatcher {
+  private static final long serialVersionUID = 2147639646936488804L;
+
   private static final Pattern PACKAGE_NAME =
       Pattern.compile("[a-z][a-z0-9]*(?:\\.[a-z][a-z0-9]*)*");
 
@@ -28,7 +31,7 @@ public final class PackageNaming extends BugChecker implements CompilationUnitTr
     if (tree.getPackage() == null || isSuppressed(tree.getPackage(), state)) {
       return NO_MATCH;
     }
-    String name = tree.getPackageName().toString();
+    String name = getSymbol(tree.getPackage()).getQualifiedName().toString();
     if (PACKAGE_NAME.matcher(name).matches()) {
       return NO_MATCH;
     }
