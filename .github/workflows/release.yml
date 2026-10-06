@@ -37,4 +37,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           TAG: ${{ steps.tagpr.outputs.tag }}
-        run: gh release edit "$TAG" --draft=false
+        run: |
+          gh release upload "$TAG" "build/libs/errorprone-tidy-${TAG#v}.jar"
+          gh release edit "$TAG" --draft=false
