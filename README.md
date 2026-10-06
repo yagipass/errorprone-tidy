@@ -12,7 +12,9 @@ Additional [Error Prone](https://errorprone.info) checks for tidier Java code.
 
 ## Usage
 
-Requires Error Prone 2.50.0 or later on JDK 21 or later. Set up Error Prone as described in its [installation guide](https://errorprone.info/docs/installation), then add this plugin next to `error_prone_core`:
+Requires Error Prone 2.50.0 or later on JDK 21 or later. Set up Error Prone as described in its [installation guide](https://errorprone.info/docs/installation), then add this plugin next to `error_prone_core`.
+
+Maven:
 
 ```xml
 <annotationProcessorPaths>
@@ -24,9 +26,18 @@ Requires Error Prone 2.50.0 or later on JDK 21 or later. Set up Error Prone as d
   <path>
     <groupId>io.github.yagipass</groupId>
     <artifactId>errorprone-tidy</artifactId>
-    <version>0.1.0</version>
+    <version>${errorprone-tidy.version}</version>
   </path>
 </annotationProcessorPaths>
+```
+
+Gradle, with [gradle-errorprone-plugin](https://github.com/tbroyer/gradle-errorprone-plugin):
+
+```kotlin
+dependencies {
+  errorprone("com.google.errorprone:error_prone_core:$errorproneVersion")
+  errorprone("io.github.yagipass:errorprone-tidy:$errorproneTidyVersion")
+}
 ```
 
 To turn off a check, pass `-Xep:<CheckName>:OFF` to Error Prone.
