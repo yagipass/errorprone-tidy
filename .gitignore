@@ -1,4 +1,6 @@
-target/
+.gradle/
+build/
+bin/
 .direnv/
 .work/
 .pre-commit-config.yaml

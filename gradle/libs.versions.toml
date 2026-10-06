@@ -1,0 +1,18 @@
+[versions]
+errorprone = "2.50.0"
+auto-service = "1.1.1"
+nullaway = "0.14.2"
+
+[libraries]
+errorprone-annotation = { module = "com.google.errorprone:error_prone_annotation", version.ref = "errorprone" }
+errorprone-check-api = { module = "com.google.errorprone:error_prone_check_api", version.ref = "errorprone" }
+errorprone-core = { module = "com.google.errorprone:error_prone_core", version.ref = "errorprone" }
+errorprone-test-helpers = { module = "com.google.errorprone:error_prone_test_helpers", version.ref = "errorprone" }
+auto-service = { module = "com.google.auto.service:auto-service", version.ref = "auto-service" }
+auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "auto-service" }
+nullaway = { module = "com.uber.nullaway:nullaway", version.ref = "nullaway" }
+junit = "junit:junit:4.13.2"
+
+[plugins]
+errorprone = "net.ltgt.errorprone:5.1.1"
+maven-publish = "com.vanniktech.maven.publish:0.37.0"
