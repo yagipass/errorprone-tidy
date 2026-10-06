@@ -1,6 +1,6 @@
 [tagpr]
 	vPrefix = true
 	releaseBranch = main
-	versionFile = pom.xml,README.md
+	versionFile = gradle.properties,README.md
 	changelog = true
 	release = draft

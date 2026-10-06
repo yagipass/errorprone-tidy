@@ -84,11 +84,7 @@
           };
 
           devShells.default = pkgs.mkShell {
-            packages = [
-              jdk
-              (pkgs.maven.override { jdk_headless = jdk; })
-            ]
-            ++ config.pre-commit.settings.enabledPackages;
+            packages = [ jdk ] ++ config.pre-commit.settings.enabledPackages;
 
             JAVA_HOME = jdk.home;
 
