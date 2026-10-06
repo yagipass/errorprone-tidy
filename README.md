@@ -1,5 +1,12 @@
 # errorprone-tidy
 
+[![CI](https://github.com/yagipass/errorprone-tidy/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/yagipass/errorprone-tidy/actions/workflows/ci.yml?query=branch%3Amain)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.yagipass/errorprone-tidy)](https://central.sonatype.com/artifact/io.github.yagipass/errorprone-tidy)
+[![Release](https://img.shields.io/github/v/release/yagipass/errorprone-tidy)](https://github.com/yagipass/errorprone-tidy/releases/latest)
+[![License](https://img.shields.io/github/license/yagipass/errorprone-tidy)](LICENSE)
+![Java 21+](https://img.shields.io/badge/Java-21%2B-blue)
+![Error Prone 2.50.0+](https://img.shields.io/badge/Error%20Prone-2.50.0%2B-blue)
+
 Additional [Error Prone](https://errorprone.info) checks for tidier Java code.
 
 | Check | Severity | Flags |
