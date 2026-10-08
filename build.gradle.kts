@@ -1,4 +1,10 @@
+import io.github.yagipass.memberorder.MemberOrderStep
 import net.ltgt.gradle.errorprone.errorprone
+
+buildscript {
+  repositories { mavenCentral() }
+  dependencies { classpath(libs.spotless.member.order) }
+}
 
 plugins {
   `java-library`
@@ -29,7 +35,12 @@ java {
   targetCompatibility = JavaVersion.VERSION_21
 }
 
-spotless { java { googleJavaFormat(libs.versions.google.java.format.get()) } }
+spotless {
+  java {
+    addStep(MemberOrderStep.builder().order("T,SF,F,C,M:BRD,SM:BRD,M:V,SM:V").build())
+    googleJavaFormat(libs.versions.google.java.format.get())
+  }
+}
 
 tasks.withType<JavaCompile>().configureEach {
   options.encoding = "UTF-8"

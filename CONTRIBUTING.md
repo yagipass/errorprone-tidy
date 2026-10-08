@@ -10,9 +10,9 @@ Without Nix, use JDK 21 or later. The git hooks are then not installed.
 
 | Command | Purpose |
 |---|---|
-| `./gradlew build` | build, run the tests, and check the Java formatting |
+| `./gradlew build` | build, run the tests, and check the Java formatting and member order |
 | `./gradlew test --tests FinalClassTest` | run the tests of one check |
-| `./gradlew spotlessApply` | format Java with google-java-format |
+| `./gradlew spotlessApply` | order the members of Java types with spotless-member-order and format Java with google-java-format |
 | `./gradlew publishToMavenLocal` | install the plugin into the local Maven repository to try it in another project |
 | `nix fmt` | format Nix |
 | `nix flake check` | run the git hooks over every tracked file |
