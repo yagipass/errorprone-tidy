@@ -1,10 +1,7 @@
 import io.github.yagipass.memberorder.MemberOrderStep
 import net.ltgt.gradle.errorprone.errorprone
 
-buildscript {
-  repositories { mavenCentral() }
-  dependencies { classpath(libs.spotless.member.order) }
-}
+buildscript { dependencies { classpath(libs.spotless.member.order) } }
 
 plugins {
   `java-library`
