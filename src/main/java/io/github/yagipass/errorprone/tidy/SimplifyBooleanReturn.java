@@ -30,9 +30,9 @@ import org.jspecify.annotations.Nullable;
     severity = WARNING,
     linkType = NONE)
 public final class SimplifyBooleanReturn extends BugChecker implements IfTreeMatcher {
-  private static final long serialVersionUID = 5674167023609375752L;
-
   private record BooleanExit(String keyword, boolean value) {}
+
+  private static final long serialVersionUID = 5674167023609375752L;
 
   @Override
   public Description matchIf(IfTree tree, VisitorState state) {

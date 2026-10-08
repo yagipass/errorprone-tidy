@@ -3,6 +3,7 @@ errorprone = "2.50.0"
 auto-service = "1.1.1"
 nullaway = "0.14.2"
 google-java-format = "1.36.1"
+spotless-member-order = "0.1.0"
 
 [libraries]
 errorprone-annotation = { module = "com.google.errorprone:error_prone_annotation", version.ref = "errorprone" }
@@ -14,6 +15,7 @@ auto-service-annotations = { module = "com.google.auto.service:auto-service-anno
 nullaway = { module = "com.uber.nullaway:nullaway", version.ref = "nullaway" }
 junit = "junit:junit:4.13.2"
 google-java-format = { module = "com.google.googlejavaformat:google-java-format", version.ref = "google-java-format" }
+spotless-member-order = { module = "io.github.yagipass:spotless-member-order", version.ref = "spotless-member-order" }
 
 [plugins]
 errorprone = "net.ltgt.errorprone:5.1.1"

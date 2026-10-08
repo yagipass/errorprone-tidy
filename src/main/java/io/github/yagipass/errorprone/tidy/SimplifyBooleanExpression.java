@@ -30,14 +30,14 @@ import org.jspecify.annotations.Nullable;
     linkType = NONE)
 public final class SimplifyBooleanExpression extends BugChecker
     implements BinaryTreeMatcher, UnaryTreeMatcher, ConditionalExpressionTreeMatcher {
-  private static final long serialVersionUID = -5974696324324712927L;
-
   private enum Equivalent {
     OPERAND,
     NEGATED_OPERAND,
     CONSTANT,
     UNKNOWN
   }
+
+  private static final long serialVersionUID = -5974696324324712927L;
 
   @Override
   public Description matchBinary(BinaryTree tree, VisitorState state) {
