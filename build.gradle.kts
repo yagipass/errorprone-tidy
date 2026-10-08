@@ -4,6 +4,7 @@ plugins {
   `java-library`
   alias(libs.plugins.errorprone)
   alias(libs.plugins.maven.publish)
+  alias(libs.plugins.spotless)
 }
 
 repositories { mavenCentral() }
@@ -27,6 +28,8 @@ java {
   sourceCompatibility = JavaVersion.VERSION_21
   targetCompatibility = JavaVersion.VERSION_21
 }
+
+spotless { java { googleJavaFormat(libs.versions.google.java.format.get()) } }
 
 tasks.withType<JavaCompile>().configureEach {
   options.encoding = "UTF-8"

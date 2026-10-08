@@ -4,16 +4,17 @@
 
 Run `nix develop` (or `direnv allow`). It provides JDK 25 and installs the git hooks.
 
-Without Nix, use JDK 21 or later. The git hooks are then not installed, so format Java with [google-java-format](https://github.com/google/google-java-format) yourself.
+Without Nix, use JDK 21 or later. The git hooks are then not installed.
 
 ## Build and test
 
 | Command | Purpose |
 |---|---|
-| `./gradlew build` | build and run the tests |
+| `./gradlew build` | build, run the tests, and check the Java formatting |
 | `./gradlew test --tests FinalClassTest` | run the tests of one check |
+| `./gradlew spotlessApply` | format Java with google-java-format |
 | `./gradlew publishToMavenLocal` | install the plugin into the local Maven repository to try it in another project |
-| `nix fmt` | format Java and Nix |
+| `nix fmt` | format Nix |
 | `nix flake check` | run the git hooks over every tracked file |
 
 ## Proposing a change

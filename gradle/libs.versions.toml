@@ -2,6 +2,7 @@
 errorprone = "2.50.0"
 auto-service = "1.1.1"
 nullaway = "0.14.2"
+google-java-format = "1.36.1"
 
 [libraries]
 errorprone-annotation = { module = "com.google.errorprone:error_prone_annotation", version.ref = "errorprone" }
@@ -12,7 +13,9 @@ auto-service = { module = "com.google.auto.service:auto-service", version.ref = 
 auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "auto-service" }
 nullaway = { module = "com.uber.nullaway:nullaway", version.ref = "nullaway" }
 junit = "junit:junit:4.13.2"
+google-java-format = { module = "com.google.googlejavaformat:google-java-format", version.ref = "google-java-format" }
 
 [plugins]
 errorprone = "net.ltgt.errorprone:5.1.1"
 maven-publish = "com.vanniktech.maven.publish:0.37.0"
+spotless = "com.diffplug.spotless:8.10.3"
