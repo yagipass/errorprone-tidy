@@ -2,7 +2,7 @@
 errorprone = "2.50.0"
 auto-service = "1.1.1"
 nullaway = "0.14.2"
-google-java-format = "1.36.1"
+google-java-format = "1.37.0"
 spotless-member-order = "0.2.0"
 
 [libraries]
