@@ -20,4 +20,4 @@ spotless-member-order = { module = "io.github.yagipass:spotless-member-order", v
 [plugins]
 errorprone = "net.ltgt.errorprone:5.1.1"
 maven-publish = "com.vanniktech.maven.publish:0.37.0"
-spotless = "com.diffplug.spotless:8.10.3"
+spotless = "com.diffplug.spotless:8.10.4"
