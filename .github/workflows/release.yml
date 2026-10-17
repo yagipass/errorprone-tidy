@@ -15,11 +15,13 @@ permissions:
 jobs:
   tagpr:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     permissions:
       contents: write
       pull-requests: write
       issues: read
+    outputs:
+      tag: ${{ steps.tagpr.outputs.tag }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -29,20 +31,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - if: steps.tagpr.outputs.tag != ''
-        uses: cachix/install-nix-action@v31.11.1
-      - if: steps.tagpr.outputs.tag != ''
-        env:
+  publish:
+    needs: tagpr
+    if: needs.tagpr.outputs.tag != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: maven-central
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ needs.tagpr.outputs.tag }}
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v31.11.1
+      - env:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_TOKEN_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_TOKEN_PASSWORD }}
         run: nix develop --command ./gradlew build publishToMavenCentral
-      - if: steps.tagpr.outputs.tag != ''
-        env:
+      - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          TAG: ${{ steps.tagpr.outputs.tag }}
+          TAG: ${{ needs.tagpr.outputs.tag }}
         run: |
           gh release upload "$TAG" "build/libs/errorprone-tidy-${TAG#v}.jar"
           gh release edit "$TAG" --draft=false
