@@ -4,6 +4,10 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
+      exclude:
+        - io.github.yagipass:*
     commit-message:
       prefix: build
       include: scope
@@ -12,6 +16,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     allow:
       - dependency-name: nixpkgs
     commit-message:
@@ -22,6 +28,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: build
       include: scope
