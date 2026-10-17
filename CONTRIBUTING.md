@@ -28,3 +28,9 @@ A pull request:
 - registers a new check with `@AutoService(BugChecker.class)` and adds it to the table in `README.md`.
 - passes `./gradlew build`.
 - has commit messages that follow Conventional Commits, which the `commit-msg` hook checks.
+
+## Repository settings
+
+The repository settings, such as labels, rulesets, and merge options, are managed with [gh infra](https://github.com/babarot/gh-infra) in `.github/infra.yml`. Changing them needs admin access to the repository. `gh infra plan .github/infra.yml` shows how GitHub differs from the file, and `gh infra apply .github/infra.yml` applies it.
+
+Environments and secrets are not managed in the file.
