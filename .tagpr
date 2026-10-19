@@ -4,3 +4,4 @@
 	versionFile = gradle.properties
 	changelog = true
 	release = draft
+	minorLabels = enhancement,breaking-change

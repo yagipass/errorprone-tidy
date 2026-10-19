@@ -1,0 +1,14 @@
+enhancement:
+  - all:
+      - head-branch: ['^feat/']
+      - changed-files:
+          - any-glob-to-any-file: 'src/main/**'
+
+bug:
+  - all:
+      - head-branch: ['^fix/']
+      - changed-files:
+          - any-glob-to-any-file: 'src/main/**'
+
+documentation:
+  - head-branch: ['^docs/']
