@@ -27,7 +27,7 @@ A pull request:
 - adds tests in `src/test/java` with `CompilationTestHelper`, and with `BugCheckerRefactoringTestHelper` for a suggested fix. A fix for a false positive adds a test that reproduces it.
 - registers a new check with `@AutoService(BugChecker.class)` and adds it to the table in `README.md`.
 - passes `./gradlew build`.
-- has commit messages that follow Conventional Commits, which the `commit-msg` hook checks.
+- has commit messages that follow Conventional Commits, which the `commit-msg` hook checks. `feat` and `fix` are for changes to the checks. Changes to the build, CI, or tooling use `build`, `ci`, or `chore`.
 
 ## Repository settings
 
