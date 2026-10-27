@@ -82,7 +82,7 @@
 
             JAVA_HOME = jdk.home;
 
-            shellHook = config.pre-commit.installationScript + ''
+            shellHook = config.pre-commit.shellHook + ''
               export SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
             '';
           };
