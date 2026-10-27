@@ -32,7 +32,12 @@
       ];
 
       perSystem =
-        { config, pkgs, ... }:
+        {
+          config,
+          pkgs,
+          lib,
+          ...
+        }:
         let
           jdk = pkgs.jdk25;
         in
@@ -74,7 +79,14 @@
               };
             };
 
-            actionlint.enable = true;
+            jactionlint = {
+              enable = true;
+              name = "jactionlint";
+              package = pkgs.jactionlint;
+              entry = "${lib.getExe pkgs.jactionlint} --shellcheck=${lib.getExe pkgs.shellcheck}";
+              files = "^(\\.github/workflows/|\\.github/dependabot\\.ya?ml$|(.*/)?action\\.ya?ml$)";
+              types = [ "yaml" ];
+            };
           };
 
           devShells.default = pkgs.mkShell {
