@@ -48,3 +48,11 @@ dependencies {
 ```
 
 To turn off a check, pass `-Xep:<CheckName>:OFF` to Error Prone.
+
+## Development
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+errorprone-tidy is licensed under the [Apache License, Version 2.0](LICENSE).
