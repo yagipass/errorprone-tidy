@@ -32,7 +32,7 @@ A pull request:
 - references its issue (`Closes #N`), if it has one.
 - adds tests when it changes what a check flags or fixes, in `src/test/java` with `CompilationTestHelper`, and with `BugCheckerRefactoringTestHelper` for a suggested fix. A fix for a false positive adds a test that reproduces it.
 - registers a new check with `@AutoService(BugChecker.class)` and adds it to the table in `README.md`.
-- passes `./gradlew build`.
+- passes `./gradlew build` and the git hooks, which CI runs with `nix flake check`.
 - has a Conventional Commits title. Pull requests are squash-merged, so the title becomes the commit on `main`.
 
 ## Release
