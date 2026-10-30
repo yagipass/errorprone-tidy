@@ -105,7 +105,7 @@
             JAVA_HOME = jdk.home;
 
             shellHook = config.pre-commit.shellHook + ''
-              export SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
+              export SOURCE_DATE_EPOCH="$(${lib.getExe pkgs.git} log -1 --format=%ct)"
             '';
           };
         };
