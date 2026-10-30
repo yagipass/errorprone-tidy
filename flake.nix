@@ -95,7 +95,7 @@
             };
           };
 
-          devShells.default = pkgs.mkShell {
+          devShells.default = pkgs.mkShellNoCC {
             packages = [ jdk ] ++ config.pre-commit.settings.enabledPackages;
 
             JAVA_HOME = jdk.home;
