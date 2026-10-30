@@ -19,7 +19,7 @@ Without Nix, use JDK 21 or later. The git hooks are then not installed.
 
 ## Rules
 
-- `./gradlew build` fails on unformatted Java, including members out of the order set in `build.gradle.kts`, and on any javac (`-Xlint:all -Werror`) or Error Prone warning, NullAway in `src/main` included.
+- `./gradlew build` fails on unformatted Java, including members out of the order set in `build.gradle.kts`, and on any javac (`-Xlint:all,-options,-processing -Werror`) or Error Prone warning, NullAway in `src/main` included.
 - Commit messages follow Conventional Commits, checked by the `commit-msg` hook. `feat` and `fix` are for changes to the checks. Changes to the build, CI, or tooling use `build`, `ci`, or `chore`.
 - Name branches `<type>/<slug>` after the Conventional Commits type. `.github/labeler.yml` labels the pull request by it, `feat/` as `enhancement` and `fix/` as `bug` when they change `src/main`, and `docs/` as `documentation`, and `.github/release.yml` groups the changelog by these labels, `breaking-change`, and Dependabot's `dependencies`.
 
@@ -29,8 +29,8 @@ Open an issue before you start on a new check or a change to what a check flags,
 
 A pull request:
 
-- references its issue (`Closes #N`).
-- adds tests in `src/test/java` with `CompilationTestHelper`, and with `BugCheckerRefactoringTestHelper` for a suggested fix. A fix for a false positive adds a test that reproduces it.
+- references its issue (`Closes #N`), if it has one.
+- adds tests when it changes what a check flags or fixes, in `src/test/java` with `CompilationTestHelper`, and with `BugCheckerRefactoringTestHelper` for a suggested fix. A fix for a false positive adds a test that reproduces it.
 - registers a new check with `@AutoService(BugChecker.class)` and adds it to the table in `README.md`.
 - passes `./gradlew build`.
 - has a Conventional Commits title. Pull requests are squash-merged, so the title becomes the commit on `main`.
