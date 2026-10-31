@@ -1,7 +1,7 @@
 [versions]
 errorprone = "2.51.0"
 auto-service = "1.1.1"
-nullaway = "0.14.2"
+nullaway = "0.14.3"
 google-java-format = "1.36.1"
 spotless-member-order = "0.3.0"
 
