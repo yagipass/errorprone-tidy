@@ -42,7 +42,7 @@ jobs:
       - uses: nix-community/cache-nix-action@v7.0.2
         with:
           primary-key: nix-verify-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
-      - uses: gradle/actions/setup-gradle@v6.4.0
+      - uses: gradle/actions/setup-gradle@v6.4.1
         with:
           cache-provider: basic
       - run: nix develop --command ./gradlew build
