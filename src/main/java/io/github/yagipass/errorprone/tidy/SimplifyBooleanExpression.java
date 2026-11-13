@@ -51,16 +51,8 @@ public final class SimplifyBooleanExpression extends BugChecker
     if (!isPrimitiveBoolean(other)) {
       return NO_MATCH;
     }
-    Equivalent equivalent =
-        switch (tree.getKind()) {
-          case EQUAL_TO -> literal ? Equivalent.OPERAND : Equivalent.NEGATED_OPERAND;
-          case NOT_EQUAL_TO -> literal ? Equivalent.NEGATED_OPERAND : Equivalent.OPERAND;
-          case CONDITIONAL_AND -> literal ? Equivalent.OPERAND : Equivalent.CONSTANT;
-          case CONDITIONAL_OR -> literal ? Equivalent.CONSTANT : Equivalent.OPERAND;
-          default -> Equivalent.UNKNOWN;
-        };
     String replacement =
-        switch (equivalent) {
+        switch (equivalent(tree.getKind(), literal)) {
           case OPERAND -> state.getSourceForNode(other);
           case NEGATED_OPERAND -> negate(other, state);
           case CONSTANT, UNKNOWN -> null;
@@ -121,5 +113,15 @@ public final class SimplifyBooleanExpression extends BugChecker
       return operand == null ? null : !operand;
     }
     return null;
+  }
+
+  private static Equivalent equivalent(Tree.Kind operator, boolean literal) {
+    return switch (operator) {
+      case EQUAL_TO -> literal ? Equivalent.OPERAND : Equivalent.NEGATED_OPERAND;
+      case NOT_EQUAL_TO -> literal ? Equivalent.NEGATED_OPERAND : Equivalent.OPERAND;
+      case CONDITIONAL_AND -> literal ? Equivalent.OPERAND : Equivalent.CONSTANT;
+      case CONDITIONAL_OR -> literal ? Equivalent.CONSTANT : Equivalent.OPERAND;
+      default -> Equivalent.UNKNOWN;
+    };
   }
 }
